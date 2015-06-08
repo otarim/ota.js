@@ -1,0 +1,31 @@
+{
+  "name": "ota.js",
+  "version": "1.0.0",
+  "description": "a light height javascript library",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sudo webpack --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/otarim/ota.js.git"
+  },
+  "keywords": [
+    "js",
+    "otarim"
+  ],
+  "author": "otarim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otarim/ota.js/issues"
+  },
+  "homepage": "https://github.com/otarim/ota.js",
+  "dependencies": {
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.9.10"
+  }
+}
