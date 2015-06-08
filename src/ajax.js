@@ -75,26 +75,17 @@ var ajax = function(config){
 		}
 		xhr.onload = function(){
 			if(this.status >= 200 && this.status < 300 || this.status === 304){
-				resolve({
-					value: this.responseText,
-					dataType: dataType,
-					onloadCallback: config.success || function(){},
-					xhr: this
-				})
+				var value = this.responseText
+				if(dataType.toLowerCase() === 'json'){
+					value = JSON.parse(value)
+				}
+				config.success && config.success(value,this)
 			}else{
-				reject({
-					value: e,
-					errorCallback: config.error || function(){},
-					xhr: this
-				})
+				config.error && config.error(e,this)
 			}
 		}
 		xhr.ontimeout = xhr.onerror = function(e){
-			reject({
-				value: e,
-				errorCallback: config.error || function(){},
-				xhr: this
-			})
+			config.error && config.error(e,this)
 		}
 		if(config._upload){
 			// 是否文件上传
@@ -109,22 +100,6 @@ var ajax = function(config){
 		}
 		xhr.send(data)
 	})
-
-	ajaxPromise.then(function(data){
-		if(data.dataType.toLowerCase() === 'json'){
-			data.value = JSON.parse(data.value)
-		}
-		// 露出 xhr,用于 getResponseHeader
-		return data.onloadCallback(data.value,data.xhr)
-	},function(err){
-		return err.errorCallback(err.value,err.xhr)
-	}).catch(function(err){
-		// 异常处理？
-		throw new Error(err.message)
-	})
-
-	return ajaxPromise;
-	
 }
 var ajaxSetup = function(config){
 	var defaultConfig = {
