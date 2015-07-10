@@ -1,9 +1,5 @@
 var util = require('./util')
-// promise
-// Promise.all 全部完成触发 then
-// Promise.race 哪个先触发 reject 或者 resolve 触发then
-// Promise.reject 将对象转变为 promise 对象
-// Promise.resolve 将对象转变为 promise 对象
+
 var rnoContent = /^(?:get|head)$/
 var ajax = function(config){
 	var type = config.type
